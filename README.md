@@ -1,0 +1,3 @@
+- 👋 Hi, I’m @caden53443
+- 👀 I’m interested in Computer Proggraming
+- 🌱 I’m currently learning Intermidiate python and game scripting
