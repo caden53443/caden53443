@@ -106,7 +106,7 @@ class Aimbot:
     def is_target_locked(x, y):
         #plus/minus 5 pixel threshold
         threshold = 5
-        return True if 840 - threshold <= x <= 840 + threshold and 525 - threshold <= y <= 525 + threshold else False
+        return True if 960 - threshold <= x <= 960 + threshold and 540 - threshold <= y <= 540 + threshold else False
 
     def move_crosshair(self, x, y):
         if Aimbot.is_targeted():
@@ -127,8 +127,8 @@ class Aimbot:
 
     #generator yields pixel tuples for relative movement
     def interpolate_coordinates_from_center(absolute_coordinates, scale):
-        diff_x = (absolute_coordinates[0] - 840) * scale/Aimbot.pixel_increment
-        diff_y = (absolute_coordinates[1] - 525) * scale/Aimbot.pixel_increment
+        diff_x = (absolute_coordinates[0] - 960) * scale/Aimbot.pixel_increment
+        diff_y = (absolute_coordinates[1] - 540) * scale/Aimbot.pixel_increment
         length = int(math.dist((0,0), (diff_x, diff_y)))
         if length == 0: return
         unit_x = (diff_x/length) * Aimbot.pixel_increment
