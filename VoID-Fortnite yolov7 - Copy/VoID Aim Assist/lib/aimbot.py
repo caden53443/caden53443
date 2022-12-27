@@ -69,8 +69,8 @@ class Aimbot:
             print(colored("[!] CUDA ACCELERATION IS UNAVAILABLE", "red"))
             print(colored("[!] Check your PyTorch installation, else performance will be poor", "red"))
 
-        self.model.conf = 0.80 # base confidence threshold (or base detection (0-1)
-        self.model.iou = 1.00 # NMS IoU (0-1)
+        self.model.conf = 0.30 # base confidence threshold (or base detection (0-1)
+        self.model.iou = 0.40 # NMS IoU (0-1)
         self.collect_data = collect_data
         self.mouse_delay = mouse_delay
         self.debug = debug
