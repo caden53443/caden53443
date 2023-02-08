@@ -58,7 +58,7 @@ if __name__ == "__main__":
      \    /   | |_| |    |   |    |
       \  /    |     |    |   |   /
        \/     \_____/   _|_  |__/
-by--Swace
+Updated by--Cadeeen!!!
     (Neural Network Aimbot)''', "blue"))
 
     path_exists = os.path.exists("lib/config/config.json")
