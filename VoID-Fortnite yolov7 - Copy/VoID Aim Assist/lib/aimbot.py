@@ -47,17 +47,17 @@ class Input(ctypes.Structure):
 class POINT(ctypes.Structure):
     _fields_ = [("x", ctypes.c_long), ("y", ctypes.c_long)]
 
-
 class Aimbot:
     extra = ctypes.c_ulong(0)
     ii_ = Input_I()
     screen = mss.mss()
-    pixel_increment = 0.66 #controls how many pixels the mouse moves for each relative movement
+    pixel_increment = 0.85 #controls how many pixels the mouse moves for each relative movement
     with open("lib/config/config.json") as f:
         sens_config = json.load(f)
-    aimbot_status = colored("ENABLED", 'green')
+    aimbot_status = colored("ENABLED", 'blue')
 
-    def __init__(self, box_constant = 316, collect_data = False, mouse_delay = 0.0001, debug = False):
+
+    def __init__(self, box_constant = 317, collect_data = False, mouse_delay = 0.0001, debug = False):
         #controls the initial centered box width and height of the "Lunar Vision" window
         self.box_constant = box_constant #controls the size of the detection box (equaling the width and height)
 
@@ -68,8 +68,9 @@ class Aimbot:
         else:
             print(colored("[!] CUDA ACCELERATION IS UNAVAILABLE", "red"))
             print(colored("[!] Check your PyTorch installation, else performance will be poor", "red"))
+	
 
-        self.model.conf = 0.30 # base confidence threshold (or base detection (0-1)
+        self.model.conf = 0.20 # base confidence threshold (or base detection (0-1)
         self.model.iou = 0.40 # NMS IoU (0-1)
         self.collect_data = collect_data
         self.mouse_delay = mouse_delay
@@ -86,7 +87,7 @@ class Aimbot:
         print(f"[!] AIMBOT IS [{Aimbot.aimbot_status}]", end = "\r")
 
     def left_click():
-        ctypes.windll.user32.mouse_event(0x46) #left mouse down
+        ctypes.windll.user32.mouse_event(0x46) #F button pressed
         Aimbot.sleep(0.0001)
         ctypes.windll.user32.mouse_event() #left mouse up
 
@@ -106,7 +107,7 @@ class Aimbot:
     def is_target_locked(x, y):
         #plus/minus 5 pixel threshold
         threshold = 5
-        return True if 960 - threshold <= x <= 960 + threshold and 540 - threshold <= y <= 540 + threshold else False
+        return True if 960 - threshold <= x <= 960 + threshold and 530 - threshold <= y <= 540 + threshold else False#if messup was 540
 
     def move_crosshair(self, x, y):
         if Aimbot.is_targeted():
@@ -128,7 +129,7 @@ class Aimbot:
     #generator yields pixel tuples for relative movement
     def interpolate_coordinates_from_center(absolute_coordinates, scale):
         diff_x = (absolute_coordinates[0] - 960) * scale/Aimbot.pixel_increment
-        diff_y = (absolute_coordinates[1] - 540) * scale/Aimbot.pixel_increment
+        diff_y = (absolute_coordinates[1] - 530) * scale/Aimbot.pixel_increment
         length = int(math.dist((0,0), (diff_x, diff_y)))
         if length == 0: return
         unit_x = (diff_x/length) * Aimbot.pixel_increment
